@@ -1,14 +1,7 @@
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+public class TipCalculatorLogic {
+    public TipCalculatorLogic() {}
 
-public class TipCalculatorRunner {
-    // https://docs.oracle.com/javase/8/docs/api/java/text/DecimalFormat.html
-    private static final DecimalFormat df = new DecimalFormat("$0.00");
-
-    public static void main(String[] args) {
+    public void start() {
         df.setRoundingMode(RoundingMode.HALF_UP); // round up
         // variables
         Scanner scan = new Scanner(System.in);

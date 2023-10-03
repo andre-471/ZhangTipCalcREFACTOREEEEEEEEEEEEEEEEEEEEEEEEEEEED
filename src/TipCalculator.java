@@ -8,7 +8,8 @@ public class TipCalculator {
     // https://docs.oracle.com/javase/8/docs/api/java/text/DecimalFormat.html
     private static final DecimalFormat df = new DecimalFormat("$0.00");
 
-    public static void main(String[] args) {
+    public TipCalculator() { }
+    public void a() {
         df.setRoundingMode(RoundingMode.HALF_UP); // round up
         // variables
         Scanner scan = new Scanner(System.in);
