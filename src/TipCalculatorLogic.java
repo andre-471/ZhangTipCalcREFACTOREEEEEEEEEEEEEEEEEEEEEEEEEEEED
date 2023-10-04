@@ -1,8 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
 public class TipCalculatorLogic {
     public TipCalculatorLogic() {}
 
     public void start() {
-        df.setRoundingMode(RoundingMode.HALF_UP); // round up
         // variables
         Scanner scan = new Scanner(System.in);
 
@@ -12,6 +13,7 @@ public class TipCalculatorLogic {
         double totalMenusBill = 0;
         Map<String, Integer> totalItems = new HashMap<>();
 
+        List<Menu> menuList = new ArrayList<>();
         // loop for multiple calculation support
         do {
             // more variables
