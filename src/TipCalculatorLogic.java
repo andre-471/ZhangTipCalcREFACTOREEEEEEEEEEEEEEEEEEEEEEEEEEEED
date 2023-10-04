@@ -16,7 +16,6 @@ public class TipCalculatorLogic {
         do {
             // more variables
             double totalCost = 0;
-            Map<String, Integer> items = new HashMap<>();
 
             // prompts user for info and stores it
             System.out.print("How many people are in your group: ");
@@ -34,6 +33,7 @@ public class TipCalculatorLogic {
 
             double aCost;
             int numItem;
+            Menu menu = new Menu();
             while (!"end".equalsIgnoreCase(aItem)) {  // if the user didn't just end the loop
                 // more item info
                 System.out.print("Enter a cost in dollars and cents: ");
@@ -43,12 +43,7 @@ public class TipCalculatorLogic {
                 numItem = scan.nextInt();
                 scan.nextLine();
 
-                totalCost += aCost * numItem;  // add cost to totalCost
-                /* https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#merge-K-V-java.util.function.BiFunction-
-                checks if item is in hashmap
-                then adds numItem to current value or creates key and sets value to numItem
-                */
-                items.merge(aItem, numItem, Integer::sum);
+                menu.addItem(...);
 
 
                 // prompt to be checked by while loop expression
