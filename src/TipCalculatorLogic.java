@@ -1,24 +1,31 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.Scanner;
 public class TipCalculatorLogic {
-    public TipCalculatorLogic() {}
+    private static final DecimalFormat df = new DecimalFormat("$0.00");
+    private MenuLogic menuLogic;
+    private Scanner scan;
+    public TipCalculatorLogic() {
+        menuLogic = new MenuLogic();
+        scan = new Scanner(System.in);
+    }
 
+    public void printMenuInfo() {
+        System.out.println("==========================================");
+        System.out.println("Total bill before tip: " + df.format(menuLogic.getMenu().getBillBeforeTip()));
+        System.out.println("Total percentage: " + menuLogic.getMenu().getTipPercent() + "%");
+        System.out.println("Total tip: " + df.format(menuLogic.getMenu().getTipAmount()));
+        System.out.println("Total bill with tip: " + df.format(menuLogic.getMenu().getBill()));
+        System.out.println("Per person cost before tip: " + df.format(menuLogic.getMenu().getCostPerPersonNoTip()));
+        System.out.println("Tip per person: " + df.format(menuLogic.getMenu().getPerPersonTip()));
+        System.out.println("Total cost per person: " + df.format(menuLogic.getMenu().getCostPerPerson()));
+        System.out.println("==========================================");
+        System.out.println(menuLogic.getItemListString());
+    }
     public void start() {
         // variables
-        Scanner scan = new Scanner(System.in);
-
-        int totalMenus = 0;
-        double totalMenusCost = 0;
-        double totalMenusTip = 0;
-        double totalMenusBill = 0;
-        Map<String, Integer> totalItems = new HashMap<>();
-
-        List<Menu> menuList = new ArrayList<>();
         // loop for multiple calculation support
         do {
             // more variables
-            double totalCost = 0;
-
             // prompts user for info and stores it
             System.out.print("How many people are in your group: ");
             int numPeople = scan.nextInt();
@@ -31,36 +38,30 @@ public class TipCalculatorLogic {
             // start of asking for item loop
             System.out.println();
             System.out.print("Enter the item (\"end\" to end calculation): ");
-            String aItem = scan.nextLine();
+            String itemName = scan.nextLine();
 
-            double aCost;
+            double itemCost;
             int numItem;
-            Menu menu = new Menu();
+            menuLogic.createMenu(numPeople, tipPercent);
             while (!"end".equalsIgnoreCase(aItem)) {  // if the user didn't just end the loop
                 // more item info
                 System.out.print("Enter a cost in dollars and cents: ");
-                aCost = scan.nextDouble();
+                itemCost = scan.nextDouble();
                 scan.nextLine();
                 System.out.print("How many? ");
                 numItem = scan.nextInt();
                 scan.nextLine();
 
-                menu.addItem(...);
-
+                menuLogic.getMenu().addItem(itemName, itemCost, numItem);
 
                 // prompt to be checked by while loop expression
                 System.out.println();
                 System.out.print("Enter the item (\"end\" to end calculation): ");
-                aItem = scan.nextLine();
+                itemName = scan.nextLine();
             }
 
             // cost is cost of food w/o tip
             // bill is cost + tip
-            double costPerPerson = totalCost / numPeople;
-            double tipAmount = totalCost * tipPercent / 100;
-            double totalBill = tipAmount + totalCost;
-            double tipPerPerson = tipAmount / numPeople;
-            double billPerPerson = costPerPerson + tipPerPerson;
 
             // just printing out info for user
             System.out.println("==========================================");
@@ -75,17 +76,8 @@ public class TipCalculatorLogic {
             System.out.println("Items ordered: ");
             // https://stackoverflow.com/questions/43015098/how-to-iterate-through-a-map-in-java
             // I mean you didn't say it had to based on input order (prints each item)
-            for (Map.Entry<String, Integer> pair: items.entrySet()) {
-                System.out.println(pair.getKey() + " x" + pair.getValue());
-                // adds each item to another hashmap to display at the end
-                totalItems.merge(pair.getKey(), pair.getValue(), Integer::sum);
-            }
+            System.out.println();
 
-            // adds to variables to display at the end
-            totalMenus += 1;
-            totalMenusCost += totalCost;
-            totalMenusTip += tipAmount;
-            totalMenusBill += totalBill;
 
             System.out.println("==========================================");
             System.out.print("Do you want to calculate another menu? (Y/N) ");

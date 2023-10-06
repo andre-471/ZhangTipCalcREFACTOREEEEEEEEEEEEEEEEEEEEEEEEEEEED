@@ -2,19 +2,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    private Map<String, Integer> listOfItems;
-    private double totalBillBeforeTip;
+    private Map<String, Integer> itemList;
+    private double billBeforeTip;
     private int numPeople;
     private int tipPercent;
     public Menu(int numPeople, int tipPercent) {
-        this.listOfItems = new HashMap<>();
-        this.totalBillBeforeTip = 0.0;
+        this.itemList = new HashMap<>();
+        this.billBeforeTip = 0.0;
         this.numPeople = numPeople;
         this.tipPercent = tipPercent;
     }
 
-    public double getTotalBillBeforeTip() {
-        return totalBillBeforeTip;
+    public double getBillBeforeTip() {
+        return billBeforeTip;
     }
 
     public int getTipPercent() {
@@ -22,34 +22,36 @@ public class Menu {
     }
 
     public double getTipAmount() {
-        return totalBillBeforeTip * tipPercent / 100;
+        return billBeforeTip * tipPercent / 100;
     }
 
-    // should i use the methods again? or store it to a variable so
-    // i dont need to calculate it again
-    public double getTotalBill() {
-        return getTipAmount() + totalBillBeforeTip;
+    public double getBill() {
+        return getTipAmount() + billBeforeTip;
+    }
+    
+    public Map<String, Integer> getItemList() {
+        return itemList;
     }
 
-    public double costPerPersonNoTip() {
-        return totalBillBeforeTip / numPeople;
+    public double getCostPerPersonNoTip() {
+        return billBeforeTip / numPeople;
     }
 
-    public double perPersonTip() {
+    public double getPerPersonTip() {
         return getTipAmount() / numPeople;
     }
 
-    public double costPerPerson() {
-        return costPerPersonNoTip() + perPersonTip();
+    public double getCostPerPerson() {
+        return getCostPerPersonNoTip() + getPerPersonTip();
     }
 
     public void addItem(String name, double cost, int count) {
-        totalBillBeforeTip += cost * count;  // add cost to total bill
+        billBeforeTip += cost * count;  // add cost to total bill
         /* https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#merge-K-V-java.util.function.BiFunction-
         checks if item is in hashmap
         then adds numItem to current value or creates key and sets value to numItem
         */
-        listOfItems.merge(name, count, Integer::sum);
+        itemList.merge(name, count, Integer::sum);
     }
 
 
