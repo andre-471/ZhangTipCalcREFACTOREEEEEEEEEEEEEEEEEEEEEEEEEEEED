@@ -2,17 +2,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    private Map<String, Integer> itemList;
+    private Map<String, Integer> itemMap;
     private double billBeforeTip;
     private int numPeople;
     private int tipPercent;
+
+    // constructor
     public Menu(int numPeople, int tipPercent) {
-        this.itemList = new HashMap<>();
+        this.itemMap = new HashMap<>();
         this.billBeforeTip = 0.0;
         this.numPeople = numPeople;
         this.tipPercent = tipPercent;
     }
 
+    // getter methods
     public double getBillBeforeTip() {
         return billBeforeTip;
     }
@@ -29,8 +32,8 @@ public class Menu {
         return getTipAmount() + billBeforeTip;
     }
     
-    public Map<String, Integer> getItemList() {
-        return itemList;
+    public Map<String, Integer> getitemMap() {
+        return itemMap;
     }
 
     public double getCostPerPersonNoTip() {
@@ -45,16 +48,13 @@ public class Menu {
         return getCostPerPersonNoTip() + getPerPersonTip();
     }
 
+    // setter(?) method no not really
     public void addItem(String name, double cost, int count) {
         billBeforeTip += cost * count;  // add cost to total bill
         /* https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#merge-K-V-java.util.function.BiFunction-
         checks if item is in hashmap
         then adds numItem to current value or creates key and sets value to numItem
         */
-        itemList.merge(name, count, Integer::sum);
+        itemMap.merge(name, count, Integer::sum);
     }
-
-
-
-
 }
