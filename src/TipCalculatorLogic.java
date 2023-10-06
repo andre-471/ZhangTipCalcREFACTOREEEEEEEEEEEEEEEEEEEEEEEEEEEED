@@ -69,7 +69,6 @@ public class TipCalculatorLogic {
                 scan.nextLine();
 
                 currMenu.addItem(itemName, itemCost, numItem);
-                // menuLogic.getMenu().addItem(itemName, itemCost, numItem);
 
                 // prompt to be checked by while loop expression
                 System.out.println();
@@ -78,7 +77,6 @@ public class TipCalculatorLogic {
             }
 
             printMenuInfo();
-            // printMenuInfo();
             menuManager.removeMenu(); // no more menu
 
             System.out.println("==========================================");
