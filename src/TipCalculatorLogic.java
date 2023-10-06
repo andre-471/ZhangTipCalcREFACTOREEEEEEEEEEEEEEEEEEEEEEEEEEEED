@@ -4,21 +4,22 @@ public class TipCalculatorLogic {
     private static final DecimalFormat df = new DecimalFormat("$0.00");
     private MenuManager menuManager;
     private Scanner scan;
+    private Menu currMenu;
     public TipCalculatorLogic() {
         menuManager = new MenuManager();
         scan = new Scanner(System.in);
+        currMenu = null;
     }
 
-    private void printMenuInfo(Menu menu) {
-        // menu = menuLogic.getMenu()
+    private void printMenuInfo() {
         System.out.println("==========================================");
-        System.out.println("Total bill before tip: " + df.format(menu.getBillBeforeTip()));
-        System.out.println("Total percentage: " + menu.getTipPercent() + "%");
-        System.out.println("Total tip: " + df.format(menu.getTipAmount()));
-        System.out.println("Total bill with tip: " + df.format(menu.getBill()));
-        System.out.println("Per person cost before tip: " + df.format(menu.getCostPerPersonNoTip()));
-        System.out.println("Tip per person: " + df.format(menu.getPerPersonTip()));
-        System.out.println("Total cost per person: " + df.format(menu.getCostPerPerson()));
+        System.out.println("Total bill before tip: " + df.format(currMenu.getBillBeforeTip()));
+        System.out.println("Total percentage: " + currMenu.getTipPercent() + "%");
+        System.out.println("Total tip: " + df.format(currMenu.getTipAmount()));
+        System.out.println("Total bill with tip: " + df.format(currMenu.getBill()));
+        System.out.println("Per person cost before tip: " + df.format(currMenu.getCostPerPersonNoTip()));
+        System.out.println("Tip per person: " + df.format(currMenu.getPerPersonTip()));
+        System.out.println("Total cost per person: " + df.format(currMenu.getCostPerPerson()));
         System.out.println("==========================================");
         System.out.println("==========================================");
         System.out.println("Items ordered: ");
@@ -56,7 +57,7 @@ public class TipCalculatorLogic {
 
             double itemCost;
             int numItem;
-            Menu menu = menuManager.createMenu(numPeople, tipPercent);
+            currMenu = menuManager.createMenu(numPeople, tipPercent);
             // menuLogic.createMenu(numPeople, tipPercent);
             while (!"end".equalsIgnoreCase(itemName)) {  // if the user didn't just end the loop
                 // more item info
@@ -67,7 +68,7 @@ public class TipCalculatorLogic {
                 numItem = scan.nextInt();
                 scan.nextLine();
 
-                menu.addItem(itemName, itemCost, numItem);
+                currMenu.addItem(itemName, itemCost, numItem);
                 // menuLogic.getMenu().addItem(itemName, itemCost, numItem);
 
                 // prompt to be checked by while loop expression
@@ -76,7 +77,7 @@ public class TipCalculatorLogic {
                 itemName = scan.nextLine();
             }
 
-            printMenuInfo(menu);
+            printMenuInfo();
             // printMenuInfo();
             menuManager.removeMenu(); // no more menu
 
