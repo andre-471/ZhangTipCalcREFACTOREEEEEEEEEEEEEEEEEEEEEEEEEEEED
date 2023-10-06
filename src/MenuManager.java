@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 public class MenuManager {
+    // instance variables
     private Map<String, Integer> allItems;
     private Menu currMenu;
     private int totalMenus;
@@ -8,7 +9,7 @@ public class MenuManager {
     private double totalMenusTip;
     private double totalMenusBill;
 
-
+    // constructor
     public MenuManager() {
         allItems = new HashMap<>();
         currMenu = null;
@@ -19,6 +20,7 @@ public class MenuManager {
 
     }
 
+    // private methods
     private String parseHashMap(Map<String, Integer> hashMap) {
         String str = "";
         for (Map.Entry<String, Integer> pair: hashMap.entrySet()) {
@@ -27,14 +29,13 @@ public class MenuManager {
         return str;
     }
 
-    public Menu createMenu(int numPeople, int tipPercent) {
-        totalMenus += 1;
-        currMenu = new Menu(numPeople, tipPercent);
-        return currMenu;
-    }
-
+    // getter(ish) methods
     public String getMenuItemMapString() {
         return parseHashMap(currMenu.getitemMap());
+    }
+
+    public String getAllItemMapString() {
+        return parseHashMap(allItems);
     }
 
     public int getTotalMenus() {
@@ -48,9 +49,16 @@ public class MenuManager {
     public double getTotalMenusTip() {
         return totalMenusTip;
     }
-    
+
     public double getTotalMenusBill() {
         return totalMenusBill;
+    }
+
+    // menu adder and remover
+    public Menu createMenu(int numPeople, int tipPercent) {
+        totalMenus += 1;
+        currMenu = new Menu(numPeople, tipPercent);
+        return currMenu;
     }
 
     public void removeMenu() {
@@ -61,9 +69,5 @@ public class MenuManager {
         totalMenusTip += currMenu.getTipAmount();
         totalMenusBill += currMenu.getBill();
         currMenu = null;
-    }
-
-    public String getAllItemMapString() {
-        return parseHashMap(allItems);
     }
 }

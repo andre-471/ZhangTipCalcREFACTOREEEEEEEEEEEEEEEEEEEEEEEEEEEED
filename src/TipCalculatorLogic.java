@@ -5,10 +5,11 @@ public class TipCalculatorLogic {
     private MenuManager menuManager;
     private Scanner scan;
     private Menu currMenu;
+
     public TipCalculatorLogic() {
-        menuManager = new MenuManager();
+        menuManager = new MenuManager();  // manages the menu (total stuff)
         scan = new Scanner(System.in);
-        currMenu = null;
+        currMenu = null;  // current menu
     }
 
     private void printMenuInfo() {
