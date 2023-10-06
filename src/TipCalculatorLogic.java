@@ -39,8 +39,6 @@ public class TipCalculatorLogic {
         System.out.println(menuManager.getAllItemMapString());
     }
     public void start() {
-        // variables
-        // loop for multiple menu support
         do {
             // prompts user for info and stores it
             System.out.print("How many people are in your group: ");
