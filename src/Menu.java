@@ -2,12 +2,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    private Map<String, Integer> itemList;
+    private Map<String, Integer> itemMap;
     private double billBeforeTip;
     private int numPeople;
     private int tipPercent;
     public Menu(int numPeople, int tipPercent) {
-        this.itemList = new HashMap<>();
+        this.itemMap = new HashMap<>();
         this.billBeforeTip = 0.0;
         this.numPeople = numPeople;
         this.tipPercent = tipPercent;
@@ -29,8 +29,8 @@ public class Menu {
         return getTipAmount() + billBeforeTip;
     }
     
-    public Map<String, Integer> getItemList() {
-        return itemList;
+    public Map<String, Integer> getitemMap() {
+        return itemMap;
     }
 
     public double getCostPerPersonNoTip() {
@@ -51,7 +51,7 @@ public class Menu {
         checks if item is in hashmap
         then adds numItem to current value or creates key and sets value to numItem
         */
-        itemList.merge(name, count, Integer::sum);
+        itemMap.merge(name, count, Integer::sum);
     }
 
 
